@@ -1,28 +1,51 @@
-//para fins de organização, as partes do código que tem estão entre 
-//gabrieledecarvalhoinicio e //gabrieledecarvalhofim
-//são partes editadas do arquivo padrão
+/**
+ * Roboloboro - a robot by gabrieledecarvalho
+ */
 
 package roboloboropack;
 import robocode.*;
-//import java.awt.Color;
-
-// API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
-
-/**
- * Roboloboro - a robot by (gabrieledecarvalho)
- */
+//(?)importando biblioteca de cores:
+import java.awt.Color;
 
 public class Roboloboro extends Robot
 {
 	/**
 	 * run: Roboloboro's default behavior
 	 */
-	public void run() {
-		// Initialization of the robot should be put here
+	
+	public void run() {		
+		/** 
+		* MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
+		* setBodyColor(Color.red);
+		* setGunColor(Color.white);
+		* setRadarColor(Color.purple);
+		*/
 		
-		//setBodyColor(Color.red);
-		//setGunColor(Color.white);
-		//setRadarColor(Color.purple);
+		/**
+		* (?)DEFININDO A POSIÇÃO INICIAL E DIREÇÃO DO ROBÔ:
+		* setAdjustGunForRobotTurn(true);
+		* setAdjustRadarForGunTurn(true);
+		* setAdjustRadarForRobotTurn(true);
+		*/
+		
+		/**
+		* (?)MODIFICANDO AS CORES DO ROBÔ BASEADO NA QUANTIDADE DE ENERGIA QUE ELE POSSUI NO MOMENTO:		* 
+		* getEnergy();
+		* if(getEnergy()>=90){
+        	* setBodyColor(new Color(0, 255, 0));
+		* }else if(getEnergy()<90 && getEnergy()>=40){
+        	* setBodyColor(new Color(0, 0, 255)); 
+	    * }else if(getEnergy()<40){
+    	    * setBodyColor(new Color(255, 0, 0)); 
+    	* }
+		*/
+		
+		/**
+		 * DEFININDO ALGUMAS VARIÁVEIS EM RELAÇÃO AO CAMPO DE BATALHA:
+		 * double h = getBattleFieldHeight();
+		 * double w = getBattleFieldWidth();
+		 * double d1 = (h/2 + w/2)/2;
+		 */		
 
 		// Robot main loop
 		while(true) {
@@ -58,3 +81,4 @@ public class Roboloboro extends Robot
 		back(20);
 	}	
 }
+// API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
