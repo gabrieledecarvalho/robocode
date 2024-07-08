@@ -1,3 +1,7 @@
+//para fins de organização, as partes do código que tem estão entre 
+//gabrieledecarvalhoinicio e //gabrieledecarvalhofim
+//são partes editadas do arquivo padrão
+
 package roboloboropack;
 import robocode.*;
 //import java.awt.Color;
@@ -5,7 +9,7 @@ import robocode.*;
 // API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
 
 /**
- * Roboloboro - a robot by (your name here)
+ * Roboloboro - a robot by (gabrieledecarvalho)
  */
 
 public class Roboloboro extends Robot
@@ -15,15 +19,14 @@ public class Roboloboro extends Robot
 	 */
 	public void run() {
 		// Initialization of the robot should be put here
-
-		// After trying out your robot, try uncommenting the import at the top,
-		// and the next line:
-
-		// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
+		
+		//setBodyColor(Color.red);
+		//setGunColor(Color.white);
+		//setRadarColor(Color.purple);
 
 		// Robot main loop
 		while(true) {
-			// Replace the next 4 lines with any behavior you would like
+			//Replace the next 4 lines with any behavior you would like
 			ahead(100);
 			turnGunRight(360);
 			back(100);
