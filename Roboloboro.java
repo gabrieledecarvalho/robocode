@@ -1,5 +1,5 @@
 /**
- * Roboloboro - a robot by gabrieledecarvalho
+ * Roboloboro - a robot by gabrieledecarvalho and fenamattos
  */
 
 package roboloboropack;
