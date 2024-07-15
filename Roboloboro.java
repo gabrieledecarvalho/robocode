@@ -4,7 +4,7 @@
 
 package roboloboropack;
 import robocode.*;
-//(?)importando biblioteca de cores:
+//importando biblioteca de cores:
 import java.awt.Color;
 
 public class Roboloboro extends Robot
@@ -12,41 +12,11 @@ public class Roboloboro extends Robot
 	/**
 	 * run: Roboloboro's default behavior
 	 */
-	
+	 
 	public void run() {		
-		/** 
-		* MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
-		* setBodyColor(Color.red);
-		* setGunColor(Color.white);
-		* setRadarColor(Color.purple);
-		*/
+		//MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
+		setColors(new Color(150, 123, 182), new Color(153, 0, 0),new Color(255, 229, 180));
 		
-		/**
-		* (?)DEFININDO A POSIÇÃO INICIAL E DIREÇÃO DO ROBÔ:
-		* setAdjustGunForRobotTurn(true);
-		* setAdjustRadarForGunTurn(true);
-		* setAdjustRadarForRobotTurn(true);
-		*/
-		
-		/**
-		* (?)MODIFICANDO AS CORES DO ROBÔ BASEADO NA QUANTIDADE DE ENERGIA QUE ELE POSSUI NO MOMENTO:		* 
-		* getEnergy();
-		* if(getEnergy()>=90){
-        	* setBodyColor(new Color(0, 255, 0));
-		* }else if(getEnergy()<90 && getEnergy()>=40){
-        	* setBodyColor(new Color(0, 0, 255)); 
-	    * }else if(getEnergy()<40){
-    	    * setBodyColor(new Color(255, 0, 0)); 
-    	* }
-		*/
-		
-		/**
-		 * DEFININDO ALGUMAS VARIÁVEIS EM RELAÇÃO AO CAMPO DE BATALHA:
-		 * double h = getBattleFieldHeight();
-		 * double w = getBattleFieldWidth();
-		 * double d1 = (h/2 + w/2)/2;
-		 */		
-
 		// Robot main loop
 		while(true) {
 			//Replace the next 4 lines with any behavior you would like
