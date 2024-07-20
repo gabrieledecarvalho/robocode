@@ -6,6 +6,8 @@ package roboloboropack;
 import robocode.*;
 //importando biblioteca de cores:
 import java.awt.Color;
+//importando biblioteca do robo avançado:
+import robocode.AdvancedRobot;
 
 public class Roboloboro extends Robot
 {
@@ -16,6 +18,11 @@ public class Roboloboro extends Robot
 	public void run() {		
 		//MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
 		setColors(new Color(150, 123, 182), new Color(153, 0, 0),new Color(255, 229, 180));
+		
+		//AJUSTANDO O ROBÔ AVANÇADO, ARMA E RADAR SE MOVEM LIVREMENTE:
+		setAdjustGunForRobotTurn(true); //arma não se mexe com o corpo
+		setAdjustRadarForGunTurn(true); //radar nao se mexe com a arma
+		setAdjustRadarForRobotTurn(true); //radar não se mexe com o robo
 		
 		// Robot main loop
 		while(true) {
