@@ -9,7 +9,7 @@ import java.awt.Color;
 //importando biblioteca do robo avançado:
 import robocode.AdvancedRobot;
 
-public class Roboloboro extends Robot
+public class Roboloboro extends AdvancedRobot
 {
 	/**
 	 * run: Roboloboro's default behavior
