@@ -8,6 +8,9 @@ import robocode.*;
 import java.awt.Color;
 //importando biblioteca do robo avançado:
 import robocode.AdvancedRobot;
+//importanto util para utilizar angulos relativos/absolutos - para ser utilizado no onScannedRobotEvent:
+import static robocode.util.Utils.normalRelativeAngleDegrees;
+import robocode.util.*;
 
 public class Roboloboro extends AdvancedRobot
 {
