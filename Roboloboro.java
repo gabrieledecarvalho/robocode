@@ -7,53 +7,30 @@ import robocode.*;
 //(?)importando biblioteca de cores:
 import java.awt.Color;
 
-public class Roboloboro extends Robot
+public class Roboloboro extends AdvancedRobot
 {
 	/**
 	 * run: Roboloboro's default behavior
 	 */
 	
 	public void run() {		
-		/** 
-		* MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
-		* setBodyColor(Color.red);
-		* setGunColor(Color.white);
-		* setRadarColor(Color.purple);
-		*/
-		
-		/**
-		* (?)DEFININDO A POSIÇÃO INICIAL E DIREÇÃO DO ROBÔ:
-		* setAdjustGunForRobotTurn(true);
-		* setAdjustRadarForGunTurn(true);
-		* setAdjustRadarForRobotTurn(true);
-		*/
-		
-		/**
-		* (?)MODIFICANDO AS CORES DO ROBÔ BASEADO NA QUANTIDADE DE ENERGIA QUE ELE POSSUI NO MOMENTO:		* 
-		* getEnergy();
-		* if(getEnergy()>=90){
-        	* setBodyColor(new Color(0, 255, 0));
-		* }else if(getEnergy()<90 && getEnergy()>=40){
-        	* setBodyColor(new Color(0, 0, 255)); 
-	    * }else if(getEnergy()<40){
-    	    * setBodyColor(new Color(255, 0, 0)); 
-    	* }
-		*/
-		
-		/**
-		 * DEFININDO ALGUMAS VARIÁVEIS EM RELAÇÃO AO CAMPO DE BATALHA:
-		 * double h = getBattleFieldHeight();
-		 * double w = getBattleFieldWidth();
-		 * double d1 = (h/2 + w/2)/2;
-		 */		
+				
+		// DEFININDO A POSIÇÃO INICIAL E DIREÇÃO DO ROBÔ:
+		setAdjustGunForRobotTurn(true);
+		setAdjustRadarForGunTurn(true);
+		setAdjustRadarForRobotTurn(true);	
 
-		// Robot main loop
+		// MOVIMENTAÇÃO PRINCIPAL DO ROBOLOBORO, SEM EVENTOS:
 		while(true) {
-			//Replace the next 4 lines with any behavior you would like
-			ahead(100);
-			turnGunRight(360);
-			back(100);
-			turnGunRight(360);
+			//DEFININDO ALGUMAS VARIÁVEIS EM RELAÇÃO AO CAMPO DE BATALHA:
+			double wBattleField = getBattleFieldHeight(); //profundidade do campo de batalha
+			double hBattleField = getBattleFieldWidth(); //altura do campo de batalha
+			double diagonalBattleField = (Math.sqrt((Math.pow(wBattleField,2) + Math.pow(hBattleField,2))))/2;			
+			setTurnRight(45);
+			setAhead(diagonalBattleField/2);
+			setTurnGunRight(360);
+			execute(); //executa as 4 ações acima junto 
+			turnRadarRight(360);
 		}
 	}
 
@@ -69,16 +46,32 @@ public class Roboloboro extends Robot
 	 * onHitByBullet: What to do when you're hit by a bullet
 	 */
 	public void onHitByBullet(HitByBulletEvent e) {
-		// Replace the next line with any behavior you would like
-		back(10);
+		double energia = getEnergy();
+		double eDirecao = e.getBearing(); //direção que a bala chegou
+		if(energia < 80){
+			setTurnRight(-eDirecao); //vai para o lado oposto
+			setAhead(100);
+			execute();
+		}else{
+			turnGunRight(360);
+		}
 	}
 	
 	/**
 	 * onHitWall: What to do when you hit a wall
 	 */
 	public void onHitWall(HitWallEvent e) {
-		// Replace the next line with any behavior you would like
-		back(20);
-	}	
+		double wBattleField = getBattleFieldHeight(); //profundidade do campo de batalha
+		double hBattleField = getBattleFieldWidth(); //altura do campo de batalha
+		double diagonalBattleField = (Math.sqrt((Math.pow(wBattleField,2)+Math.pow(hBattleField,2))))/2;
+		double eDirecao = e.getBearing(); //direção da parede
+   	 	turnRight(-eDirecao); //vai para o lado oposto
+	    ahead(diagonalBattleField/2);
+	}
+
+	public void onWin(WinEvent e) {
+		turnRight(720);
+		turnLeft(720);
+	}
 }
 // API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
