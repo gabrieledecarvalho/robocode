@@ -4,26 +4,26 @@
 
 package roboloboropack;
 import robocode.*;
-//importando biblioteca de cores:
+// importando biblioteca de cores:
 import java.awt.Color;
-//importando biblioteca do robo avançado:
+// importando biblioteca do robo avançado:
 import robocode.AdvancedRobot;
-//importanto util para utilizar angulos relativos/absolutos - para ser utilizado no onScannedRobotEvent:
+// importanto util para utilizar angulos relativos/absolutos - para ser utilizado no onScannedRobotEvent:
 import static robocode.util.Utils.normalRelativeAngleDegrees;
 import robocode.util.*;
 
 public class Roboloboro extends AdvancedRobot {
 	 
 	public void run() {		
-		//MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
+		// MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
 		setColors(new Color(150, 123, 182), new Color(153, 0, 0),new Color(255, 229, 180));
 		
-		//AJUSTANDO O ROBÔ AVANÇADO, ARMA E RADAR SE MOVEM LIVREMENTE:
+		// AJUSTANDO O ROBÔ AVANÇADO, ARMA E RADAR SE MOVEM LIVREMENTE:
 		setAdjustGunForRobotTurn(true); //arma não se mexe com o corpo
 		setAdjustRadarForGunTurn(true); //radar nao se mexe com a arma
 		setAdjustRadarForRobotTurn(true); //radar não se mexe com o robo
 		
-		// Robot main loop
+		// Loop de movimentação do Roboloboro:
 		while(true) {
 			//Replace the next 4 lines with any behavior you would like
 			ahead(100);
@@ -32,9 +32,10 @@ public class Roboloboro extends AdvancedRobot {
 			turnGunRight(360);
 		}
 	}
-
+	
+	// EVENTO: scanner detectou um robo:
 	public void onScannedRobot(ScannedRobotEvent e) {
-		//captando informações inimigas, em radianos pois a função Math.sin e Math.cos só funcionam em radianos:
+		// captando informações inimigas, em radianos pois a função Math.sin e Math.cos só funcionam em radianos:
 		
 		double direcaoRobo = getHeadingRadians(); //direcao no campo a qual meu robo está indo
 		double eAngulo = e.getBearingRadians(); //posicao (angulo) a qual o inimigo está
@@ -44,7 +45,14 @@ public class Roboloboro extends AdvancedRobot {
 		
 		double eX = getX() + Math.sin(anguloRelativo) * eDistancia; //posicao x do robo inimigo
 		double eY = getX() + Math.cos(anguloRelativo) * eDistancia; //posicao y do robo inimigo
-	
+		
+		// PREVISOR - captando variáveis necessárias:
+		double eVelocidade = e.getVelocity(); //velocidade do inimigo
+		double eDirecao = e.getHeadingRadians();
+		
+		// PREVISOR - posicao lida do inimigo + o quanto ele vai andar baseado na velocidade que ele tem
+		double ePrevisaoX = eX + Math.sin(eDirecao) * eVelocidade; //previsao de onde o inimigo estará (ponto x)
+		double ePrevisaoY = eY + Math.cos(eDirecao) * eVelocidade;//previsao de onde o inimigo estará (ponto y)
 	}
 	
 /**
