@@ -35,8 +35,9 @@ public class Roboloboro extends AdvancedRobot {
 	
 	// EVENTO: scanner detectou um robo:
 	public void onScannedRobot(ScannedRobotEvent e) {
-		// captando informações inimigas, em radianos pois a função Math.sin e Math.cos só funcionam em radianos:
+		// IDEIA: prever a próxima posição inimiga antes de atirar.
 		
+		// captando informações inimigas, em radianos pois a função Math.sin e Math.cos só funcionam em radianos:
 		double direcaoRobo = getHeadingRadians(); //direcao no campo a qual meu robo está indo
 		double eAngulo = e.getBearingRadians(); //posicao (angulo) a qual o inimigo está
 		
@@ -61,6 +62,15 @@ public class Roboloboro extends AdvancedRobot {
 				ePrevisaoX - getX(), ePrevisaoY - getY() 
 			)
 		);
+		
+		double anguloRadar = getRadarHeadingRadians(); // angulo radar roboloboro
+		setTurnRightRadians(eAngulo / 2* - 1 - anguloRadar); 
+		setTurnRadarRightRadians(Utils.normalRelativeAngle(eAngulo - anguloRadar));
+		setTurnGunRightRadians(Utils.normalRelativeAngle(anguloAbs - anguloRadar)); 
+		// execute(); preciso do execute ?
+					
+		double potenciaDoTiro = Math.min(2.0, getEnergy());//para que a potencia do tiro nunca seja maior que a energia restante
+		fire(potenciaDoTiro);
 	}
 	
 /**
