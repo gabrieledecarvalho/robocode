@@ -12,11 +12,7 @@ import robocode.AdvancedRobot;
 import static robocode.util.Utils.normalRelativeAngleDegrees;
 import robocode.util.*;
 
-public class Roboloboro extends AdvancedRobot
-{
-	/**
-	 * run: Roboloboro's default behavior
-	 */
+public class Roboloboro extends AdvancedRobot {
 	 
 	public void run() {		
 		//MODIFICANDO AS CORES DO ROBO PARA QUE CADA PEÇA TENHA UMA COR DIFERENTE:
@@ -37,15 +33,21 @@ public class Roboloboro extends AdvancedRobot
 		}
 	}
 
-	/**
-	 * onScannedRobot: What to do when you see another robot
-	 */
 	public void onScannedRobot(ScannedRobotEvent e) {
-		// Replace the next line with any behavior you would like
-		fire(1);
+		//captando informações inimigas, em radianos pois a função Math.sin e Math.cos só funcionam em radianos:
+		
+		double direcaoRobo = getHeadingRadians(); //direcao no campo a qual meu robo está indo
+		double eAngulo = e.getBearingRadians(); //posicao (angulo) a qual o inimigo está
+		
+		double anguloRelativo = direcaoRobo + eAngulo; //angulo em relação ao roboloboro
+		double eDistancia = e.getDistance(); //distancia entre o ponto central do inimigo e o ponto central do roboloboro
+		
+		double eX = getX() + Math.sin(anguloRelativo) * eDistancia; //posicao x do robo inimigo
+		double eY = getX() + Math.cos(anguloRelativo) * eDistancia; //posicao y do robo inimigo
+	
 	}
-
-	/**
+	
+/**
 	 * onHitByBullet: What to do when you're hit by a bullet
 	 */
 	public void onHitByBullet(HitByBulletEvent e) {
