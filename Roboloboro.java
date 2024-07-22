@@ -53,6 +53,14 @@ public class Roboloboro extends AdvancedRobot {
 		// PREVISOR - posicao lida do inimigo + o quanto ele vai andar baseado na velocidade que ele tem
 		double ePrevisaoX = eX + Math.sin(eDirecao) * eVelocidade; //previsao de onde o inimigo estará (ponto x)
 		double ePrevisaoY = eY + Math.cos(eDirecao) * eVelocidade;//previsao de onde o inimigo estará (ponto y)
+		
+		//PREVISOR - angulo absoluto do robo inimigo
+		//utilizando a util de transformar o angulo em absoluto baseado na posicao original e ajustando com a previsao
+		double anguloAbs = Utils.normalAbsoluteAngle(
+			Math.atan2( // atan retorna um angulo
+				ePrevisaoX - getX(), ePrevisaoY - getY() 
+			)
+		);
 	}
 	
 /**
