@@ -12,6 +12,7 @@ import robocode.AdvancedRobot;
 import static robocode.util.Utils.normalRelativeAngleDegrees;
 import robocode.util.*;
 
+<<<<<<< HEAD
 public class Roboloboro extends AdvancedRobot {
 	 
 	public void run() {		
@@ -25,11 +26,15 @@ public class Roboloboro extends AdvancedRobot {
 		
 		// Loop de movimentação do Roboloboro:
 		while(true) {
-			//Replace the next 4 lines with any behavior you would like
-			ahead(100);
-			turnGunRight(360);
-			back(100);
-			turnGunRight(360);
+			//DEFININDO ALGUMAS VARIÁVEIS EM RELAÇÃO AO CAMPO DE BATALHA:
+			double wBattleField = getBattleFieldHeight(); //profundidade do campo de batalha
+			double hBattleField = getBattleFieldWidth(); //altura do campo de batalha
+			double diagonalBattleField = (Math.sqrt((Math.pow(wBattleField,2) + Math.pow(hBattleField,2))))/2;			
+			setTurnRight(45);
+			setAhead(diagonalBattleField/2);
+			setTurnGunRight(360);
+			execute(); //executa as 4 ações acima junto 
+			turnRadarRight(360);
 		}
 	}
 	
@@ -66,8 +71,7 @@ public class Roboloboro extends AdvancedRobot {
 		double anguloRadar = getRadarHeadingRadians(); // angulo radar roboloboro
 		setTurnRightRadians(eAngulo / 2* - 1 - anguloRadar); 
 		setTurnRadarRightRadians(Utils.normalRelativeAngle(eAngulo - anguloRadar));
-		setTurnGunRightRadians(Utils.normalRelativeAngle(anguloAbs - anguloRadar)); 
-		// execute(); preciso do execute ?
+		setTurnGunRightRadians(Utils.normalRelativeAngle(anguloAbs - anguloRadar));
 					
 		double potenciaDoTiro = Math.min(2.0, getEnergy());//para que a potencia do tiro nunca seja maior que a energia restante
 		fire(potenciaDoTiro);
@@ -77,16 +81,32 @@ public class Roboloboro extends AdvancedRobot {
 	 * onHitByBullet: What to do when you're hit by a bullet
 	 */
 	public void onHitByBullet(HitByBulletEvent e) {
-		// Replace the next line with any behavior you would like
-		back(10);
+		double energia = getEnergy();
+		double eDirecao = e.getBearing(); //direção que a bala chegou
+		if(energia < 80){
+			setTurnRight(-eDirecao); //vai para o lado oposto
+			setAhead(100);
+			execute();
+		}else{
+			turnGunRight(360);
+		}
 	}
 	
 	/**
 	 * onHitWall: What to do when you hit a wall
 	 */
 	public void onHitWall(HitWallEvent e) {
-		// Replace the next line with any behavior you would like
-		back(20);
-	}	
+		double wBattleField = getBattleFieldHeight(); //profundidade do campo de batalha
+		double hBattleField = getBattleFieldWidth(); //altura do campo de batalha
+		double diagonalBattleField = (Math.sqrt((Math.pow(wBattleField,2)+Math.pow(hBattleField,2))))/2;
+		double eDirecao = e.getBearing(); //direção da parede
+   	 	turnRight(-eDirecao); //vai para o lado oposto
+	    ahead(diagonalBattleField/2);
+	}
+
+	public void onWin(WinEvent e) {
+		turnRight(720);
+		turnLeft(720);
+	}
 }
 // API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
