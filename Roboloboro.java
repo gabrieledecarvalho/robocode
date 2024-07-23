@@ -12,7 +12,6 @@ import robocode.AdvancedRobot;
 import static robocode.util.Utils.normalRelativeAngleDegrees;
 import robocode.util.*;
 
-<<<<<<< HEAD
 public class Roboloboro extends AdvancedRobot {
 	 
 	public void run() {		
